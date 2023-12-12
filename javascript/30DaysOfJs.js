@@ -51,7 +51,7 @@ const expect = function(val) {
  */
 
 let currentValue = 0
-const createCounter = function(init) {
+const createCounters = function(init) {
     currentValue = init
     return {
         increment: () => {
@@ -160,4 +160,53 @@ return function(...args){
       }
   }
 };
+// -------------------------------------------
+
+// A memo of a function as a Function that 
+// never is called twice with the same inputs 
+// retrun instead cache values
+
+// Inputs: sum, fib, factorial
+
+// sum = [a, b]: integer => a + b
+
+// fib = [a: integer] => if (n <== 1) 1 : 
+//                          fib(n - 1) + fib(n - 2) 
+
+// factorial = [n: integer] => if (n <== 1) 1 : 
+//                              factorial(n - 1) * n
+
+
+/**
+ * @param {Function} fn
+ * @return {Function}
+ */
+function memoize(fn) {
+  const cacheValues = {}
+  return function(...args) {
+      const key = `[${args.toString()}]`
+      const cache = cacheValues[key]
+      
+      if (key in cacheValues) return cache
+
+      const call = fn(...args)
+      cacheValues[key] = call
+
+      return call
+  }
+}
+
+values = [[0,0],[0,0]]
+let callCount = 0;
+
+const memoizedFn = memoize(function (a, b) {
+  callCount += 1;
+  return a + b;
+})
+
+values.forEach(values => {
+  memoizedFn(...values)
+})
+
+console.log(callCount)
 // -------------------------------------------
