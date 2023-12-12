@@ -207,6 +207,17 @@ const memoizedFn = memoize(function (a, b) {
 values.forEach(values => {
   memoizedFn(...values)
 })
-
-console.log(callCount)
 // -------------------------------------------
+
+/**
+ * @param {Promise} promise1
+ * @param {Promise} promise2
+ * @return {Promise}
+ */
+const addTwoPromises = async function(promise1, promise2) {
+    const firtsResolve = await promise1
+    const secondResolve = await promise2
+    return firtsResolve + secondResolve
+};
+
+// -----------------------------------------------------------------
