@@ -220,4 +220,13 @@ const addTwoPromises = async function(promise1, promise2) {
     return firtsResolve + secondResolve
 };
 
-// -----------------------------------------------------------------
+// --------------------------------------------------------------
+
+/**
+ * @param {number} millis
+ * @return {Promise}
+ */
+async function sleep(millis) {
+  return new Promise(res => setTimeout(res, millis))
+}
+// ----------------------------------------------------------------
