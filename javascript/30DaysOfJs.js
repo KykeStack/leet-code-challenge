@@ -282,7 +282,7 @@ const TimeLimitedCache = function() {
 
 // for Get
 // get(key)
-// Once the key expired, the method get should return 'null'
+// Once the key expired, the method get should return '-1'
 // if an un-expired key exists, it should return the associated value. Otherwise it should return -1.
 
 // for Count 
@@ -346,7 +346,7 @@ TimeLimitedCache.prototype.count = function() {
     if (this.cache[key].duration > Date.now()) {
       count++
     }
-    
+
   })
   return count
 };
