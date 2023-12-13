@@ -12,6 +12,7 @@ var createHelloWorld = function() {
 };
 // ----------------------------------
 
+// 2620. Counter
 /**
  * @param {number} n
  * @return {Function} counter
@@ -27,6 +28,7 @@ var createCounter = function(n) {
 };
 // ------------------------------------
 
+// 2704. To Be Or Not To Be
 /**
  * @param {string} val
  * @return {Object}
@@ -44,7 +46,7 @@ const expect = function(val) {
 }};
 // ----------------------------------------
 
-
+// 2665. Counter II
 /**
  * @param {integer} init
  * @return { increment: Function, decrement: Function, reset: Function }
@@ -70,6 +72,7 @@ const createCounters = function(init) {
 };
 //-------------------------------------------
 
+// 2635. Apply Transform Over Each Element in Array
 /**
  * @param {number[]} arr
  * @param {Function} fn
@@ -84,6 +87,7 @@ const maps = function(arr, fn) {
 };
 //-------------------------------------------
 
+// 2635. Apply Transform Over Each Element in Array
 /**
  * @param {number[]} arr
  * @param {Function} fn
@@ -98,7 +102,7 @@ var filter = function(arr, fn) {
 };
 //-------------------------------------------
 
-
+// 2626. Array Reduce Transformation
 /**
  * @param {number[]} nums
  * @param {Function} fn
@@ -121,12 +125,13 @@ const reduce = function(nums, fn, init) {
 };
 // ---------------------------------------
 
+// 2629. Function Composition
 /**
  * @param {Function[]} functions
  * @return {Function}
  */
 const compose = function(functions) {
-    functions.reverse()
+  functions.reverse()
 	return function(x) {
         let evaluator = x
         functions.forEach((element) => {
@@ -134,10 +139,10 @@ const compose = function(functions) {
         });
         return evaluator
     }
-    
 };
 // ------------------------------------------
 
+// 2703. Return Length of Arguments Passed
 /**
  * @param {...(null|boolean|number|string|Array|Object)} args
  * @return {number}
@@ -147,39 +152,29 @@ var argumentsLength = function(...args) {
 };
 // ----------------------------------------
 
+// 2666. Allow One Function Call
 /**
  * @param {Function} fn
  * @return {Function}
  */
 var once = function(fn) {
   let call = false
-return function(...args){
-      if (!call) {
-          call = true
-          return fn(...args)
+  return function(...args){
+    if (!call) {
+      call = true
+      return fn(...args)
       }
   }
 };
 // -------------------------------------------
 
-// A memo of a function as a Function that 
-// never is called twice with the same inputs 
-// retrun instead cache values
-
-// Inputs: sum, fib, factorial
-
-// sum = [a, b]: integer => a + b
-
-// fib = [a: integer] => if (n <== 1) 1 : 
-//                          fib(n - 1) + fib(n - 2) 
-
-// factorial = [n: integer] => if (n <== 1) 1 : 
-//                              factorial(n - 1) * n
-
-
+// 2623. Memoize 
 /**
  * @param {Function} fn
  * @return {Function}
+ * Creates a memo of a function,  
+ * that is never called twice with the same inputs 
+ * return instead cache values
  */
 function memoize(fn) {
   const cacheValues = {}
@@ -197,6 +192,7 @@ function memoize(fn) {
 }
 // -------------------------------------------
 
+// 2723. Add Two Promises
 /**
  * @param {Promise} promise1
  * @param {Promise} promise2
@@ -208,8 +204,9 @@ const addTwoPromises = async function(promise1, promise2) {
     return firtsResolve + secondResolve
 };
 
-// --------------------------------------------------------------
+// ------------------------------------------------------------
 
+// 2621. Sleep
 /**
  * @param {number} millis
  * @return {Promise}
@@ -217,17 +214,16 @@ const addTwoPromises = async function(promise1, promise2) {
 async function sleep(millis) {
   return new Promise(res => setTimeout(res, millis))
 }
-// ----------------------------------------------------------------
+// -------------------------------------------------------------
 
-// fn shold be executed in t milliseconds
-
-// The cancel function should return a cancel execution function
-
+// 2715. Timeout Cancellation
 /**
  * @param {Function} fn
  * @param {Array} args
  * @param {number} t
  * @return {Function}
+ * fn should be executed in t milliseconds
+ * function cancellable should return a cancel execution function
  */
 var cancellable = function(fn, args, t) {
   const id = setTimeout(() => fn(...args), t)
@@ -236,22 +232,4 @@ var cancellable = function(fn, args, t) {
   }
 };
 
-// const result = [];
-
-// const fn = (x) => x * 5;
-// const args = [2], t = 20, cancelTimeMs = 50;
-
-// const start = performance.now();
-//  const log = (...argsArr) => {
-// const diff = Math.floor(performance.now() - start);
-//       result.push({"time": diff, "returned": fn(...argsArr)});
-// }
-      
-//  const cancel = cancellable(log, args, t);
-// const maxT = Math.max(t, cancelTimeMs);
-// setTimeout(cancel, cancelTimeMs);
- 
-// setTimeout(() => {
-//     console.log(result); // [{"time":20,"returned":10}]
-// }, maxT + 15)
- 
+//-----------------------------------------------
