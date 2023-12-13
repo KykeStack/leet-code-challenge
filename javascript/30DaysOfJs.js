@@ -263,3 +263,91 @@ const timeLimit = function(fn, t) {
 })
 };
 // -----------------------------------------------------
+
+// 2622. Cache With Time Limit
+
+// So this is a "Class" called TimeLimitedCache 
+// Through the property Class.prototype are being added the methods: set, get and count
+const TimeLimitedCache = function() {
+    this.cache = {};
+};
+
+// So the Class should be able to get key/value pairs within an expiration time
+
+// for Set
+// set(key, value, duration)
+// If key/value pair are expired, return null
+// If key/value pair exists and are not expired, return true else false  
+// Both the value and duration should be overwritten if the key already exists 
+
+// for Get
+// get(key)
+// Once the key expired, the method get should return 'null'
+// if an un-expired key exists, it should return the associated value. Otherwise it should return -1.
+
+// for Count 
+// count()
+// returns the count of un-expired keys.
+
+/** 
+ * @param {number} key
+ * @param {number} value
+ * @param {number} duration time until expiration in ms
+ * @return {boolean} if un-expired key already existed
+ */
+TimeLimitedCache.prototype.set = function(key, value, duration) {
+  let exists = false;
+
+  // Check if key already exists
+  if (key in this.cache) { 
+    if (this.cache[key].duration < Date.now()) {
+      return null
+    }
+    exists = true
+  }
+
+  // Overwrite or assign the value 
+  this.cache[key] = {
+    value: value, 
+    duration: Date.now() + duration 
+  }
+
+  // Return whether if exists or not
+  return exists
+};
+
+/** 
+ * @param {number} key
+ * @return {number} value associated with key
+ */
+TimeLimitedCache.prototype.get = function(key) {
+  const value = this.cache[key] ?? -1
+
+  // if key does not exist, immediately return -1 
+  if (value === -1) return value
+
+  // Check if key is expired
+  if (value.duration < Date.now()) { 
+    return -1
+  }
+
+  // All good, return the value
+  return value.value
+};
+
+/** 
+ * @return {number} count of non-expired keys
+ */
+TimeLimitedCache.prototype.count = function() {
+  let count = 0
+  Object.keys(this.cache).forEach(key => {
+
+    // look for unexpired keys
+    if (this.cache[key].duration > Date.now()) {
+      count++
+    }
+    
+  })
+  return count
+};
+// ------------------------------------------------
