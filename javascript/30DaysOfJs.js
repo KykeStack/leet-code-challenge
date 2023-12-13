@@ -233,3 +233,33 @@ var cancellable = function(fn, args, t) {
 };
 
 //-----------------------------------------------
+
+// 2637. Promise Time Limit
+/**
+ * @param {Function} fn
+ * @param {number} t
+ * @return {Function}
+ */
+
+// fn is async 
+// t is time in millis
+// return a ""time limited function""
+
+// The ""time limited function"" Rules: 
+// if fn resolve in t time, return fn => {}
+// else reject
+
+const timeLimit = function(fn, t) {
+  // ↓ This is the time limited function 
+  return new Promise(async (resolve, reject) => {
+    // Encapsulate Everything in a try/catch block
+    try {
+      setTimeout(() => reject("Time Limit Exceeded"), t)
+      resolve(await fn(...args))
+    }
+    catch (e) {
+      reject(e)
+  }
+})
+};
+// -----------------------------------------------------
