@@ -381,3 +381,51 @@ const debounce = function(fn, t) {
   }
 };
 // -----------------------------------------------------
+
+// 2721. Execute Asynchronous Functions in Parallel
+
+// Receives a list of promises, that don't accept any argument
+// The promises should execute in parallel 
+
+/**
+ * @param {Array<Function>} functions
+ * @return {Promise<any>}
+ */
+const promiseAll = function(functions) {
+  return new Promise(async (resolve, reject) => {
+      // Resolves
+      // Resolves Async all *functions
+      // It resolves when all promises have resolve successfully 
+      // Returns an Array of Values keeping the original order 
+      const resultValues = []
+      const callStack = []
+      for (const toCallStack of functions) {
+          const proms = toCallStack().catch(e => reject(e))
+          callStack.push(proms)
+      }
+      for (const task of callStack) {
+        resultValues.push(await task)
+      }
+
+      resolve(resultValues)
+        
+  })
+};
+
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+console.time()
+const promise = promiseAll([
+  () => new Promise(res => res(42)), 
+  () => new Promise(res => res(43)), 
+  () => new Promise(res => res(44)), 
+  () => new Promise(res => res(45)), 
+  () => new Promise(res => res(46)), // The last index 
+  () => delay(1000),
+  () => new Promise(res => res(47)),
+  () => delay(1000),
+  // () => new Error('Invalid')
+])
+promise.then(console.log); // [42, 43, 44, 45, 46]
