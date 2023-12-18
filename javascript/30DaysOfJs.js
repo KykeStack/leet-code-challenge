@@ -366,3 +366,18 @@ TimeLimitedCache.prototype.count = function() {
   return count
 };
 // ------------------------------------------------
+
+// 2627. Debounce
+/**
+ * @param {Function} fn
+ * @param {number} t milliseconds
+ * @return {Function}
+ */
+const debounce = function(fn, t) {
+  let currentTimeout
+  return function(...args) {
+      clearTimeout(currentTimeout)
+      currentTimeout = setTimeout(() => fn(...args), t)
+  }
+};
+// -----------------------------------------------------
