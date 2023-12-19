@@ -424,3 +424,33 @@ const isEmpty = function(obj) {
   return true
 };
 // ---------------------------------------------------------------
+
+// 2677. Chunk Array
+/**
+ * @param {Array} arr
+ * @param {number} size
+ * @return {Array}
+ */
+
+// Steps
+// Divide to obtain the number of chunks -> arr.length / size
+// Iterate over the array and push the number to idx position for every chunk
+const chunk = function(arr, size) {
+    let chunkedArray = []
+    let cycle = 1
+    let idx = 0
+
+    for (const el of arr) {
+      const next = chunkedArray[idx] ?? []
+      chunkedArray[idx] = [...next, el]
+      if (cycle < size) {
+        cycle++
+      } else {
+        cycle = 1
+        idx++
+      }
+    }
+  
+  return chunkedArray
+};
+//----------------------------------------------------------------
