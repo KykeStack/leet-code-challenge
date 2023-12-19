@@ -454,3 +454,14 @@ const chunk = function(arr, size) {
   return chunkedArray
 };
 //----------------------------------------------------------------
+
+// 2619. Array Prototype Last
+/**
+ * @return {null|boolean|number|string|Array|Object}
+ */
+Array.prototype.last = function() {
+  const last = this.slice(-1)
+  if (last.length !== 0) return last[0]
+  return -1 
+};
+//----------------------------------------------------------------
