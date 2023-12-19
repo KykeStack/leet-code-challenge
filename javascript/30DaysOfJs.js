@@ -412,3 +412,15 @@ const promiseAll = function(functions) {
   })
 };
 // -----------------------------------------------------------
+
+// 2727. Is Object Empty
+/**
+ * @param {Object|Array} obj
+ * @return {boolean}
+ */
+const isEmpty = function(obj) {
+
+  if (Object.keys(obj).length) return false
+  return true
+};
+// ---------------------------------------------------------------
