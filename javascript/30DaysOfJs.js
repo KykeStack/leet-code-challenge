@@ -411,21 +411,4 @@ const promiseAll = function(functions) {
         
   })
 };
-
-function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-console.time()
-const promise = promiseAll([
-  () => new Promise(res => res(42)), 
-  () => new Promise(res => res(43)), 
-  () => new Promise(res => res(44)), 
-  () => new Promise(res => res(45)), 
-  () => new Promise(res => res(46)), // The last index 
-  () => delay(1000),
-  () => new Promise(res => res(47)),
-  () => delay(1000),
-  // () => new Error('Invalid')
-])
-promise.then(console.log); // [42, 43, 44, 45, 46]
+// -----------------------------------------------------------
