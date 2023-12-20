@@ -593,8 +593,4 @@ class Calculator {
       return this.value
   }
 }
-
-
-const newClalc = new Calculator(2).multiply(5).power(4)
-
-console.log(newClalc)
+// ----------------------------------------------------------------
