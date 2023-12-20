@@ -594,3 +594,32 @@ class Calculator {
   }
 }
 // ----------------------------------------------------------------
+
+// 2722. Join Two Arrays by ID
+
+// Receive 2 arrays, return a Joint of them
+// While looping generate a k, v pairs hash map ->  assign then the key and value for each item
+/**
+ * @param {Array} arr1
+ * @param {Array} arr2
+ * @return {Array}
+ */
+const join = function(arr1, arr2) {
+  arr1.push.apply(arr1, arr2)
+
+  const mapped = {}
+
+  for (const item of arr1) {
+
+    if (mapped[item.id]) {
+      mapped[item.id] = Object.assign({}, mapped[item.id], item)
+    } else {
+      mapped[item.id] = item;
+    }
+
+  }
+  
+  return Object.values(mapped) 
+};
+
+// ------------------------------------------------------------------------------------------------
