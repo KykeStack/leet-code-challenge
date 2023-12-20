@@ -17,14 +17,13 @@ const createHelloWorld = function() {
  * @param {number} n
  * @return {Function} counter
  */
-
-const calls = 0
 const createCounter = function(n) {
-    return function() {
-        const newValue = n + calls
-        calls++
-        return newValue
-    };
+  let calls = 0
+  return function() {
+      const newValue = n + calls
+      calls++
+      return newValue
+  };
 };
 // ------------------------------------
 
