@@ -473,7 +473,7 @@ Array.prototype.last = function() {
  */
 Array.prototype.groupBy = function(fn) {
   const mapped = {};
-  
+
   for (const item of this) {
       const output = fn(item);
       const values = mapped[output] || [];
@@ -483,3 +483,19 @@ Array.prototype.groupBy = function(fn) {
 
   return mapped
 };
+// ---------------------------------------------------------------
+
+// 2724. Sort By
+
+// Assume that deals only with numbers, and fn will never duplicate numbers for a given array.
+// Given a function, array -> Sort and return in ascending order 
+/**
+ * @param {Array} arr
+ * @param {Function} fn
+ * @return {Array}
+ */
+const sortBy = function(arr, fn) {
+  return arr.sort((a, b) => fn(a) - fn(b))
+};
+
+// --------------------------------------------------------------------
