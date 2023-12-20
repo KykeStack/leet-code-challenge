@@ -4,7 +4,7 @@
 /**
  * @return {Function}
  */
-var createHelloWorld = function() {
+const createHelloWorld = function() {
     
   return function(...args) {
       return "Hello World"
@@ -18,8 +18,8 @@ var createHelloWorld = function() {
  * @return {Function} counter
  */
 
-var calls = 0
-var createCounter = function(n) {
+const calls = 0
+const createCounter = function(n) {
     return function() {
         const newValue = n + calls
         calls++
@@ -93,7 +93,7 @@ const maps = function(arr, fn) {
  * @param {Function} fn
  * @return {number[]}
  */
-var filter = function(arr, fn) {
+const filter = function(arr, fn) {
     const newArray = []
     for (let i = 0; arr.length > i; i++) {
       if (fn(arr[i], i)) newArray.push(arr[i])
@@ -147,7 +147,7 @@ const compose = function(functions) {
  * @param {...(null|boolean|number|string|Array|Object)} args
  * @return {number}
  */
-var argumentsLength = function(...args) {
+const argumentsLength = function(...args) {
 	return args.length
 };
 // ----------------------------------------
@@ -157,7 +157,7 @@ var argumentsLength = function(...args) {
  * @param {Function} fn
  * @return {Function}
  */
-var once = function(fn) {
+const once = function(fn) {
   let call = false
   return function(...args){
     if (!call) {
@@ -225,7 +225,7 @@ async function sleep(millis) {
  * fn should be executed in t milliseconds
  * function cancellable should return a cancel execution function
  */
-var cancellable = function(fn, args, t) {
+const cancellable1 = function(fn, args, t) {
   const id = setTimeout(() => fn(...args), t)
   return function () {
     clearTimeout(id)
@@ -241,7 +241,7 @@ var cancellable = function(fn, args, t) {
  * @param {number} t
  * @return {Function}
  */
-var cancellable = function(fn, args, t) {
+const cancellable = function(fn, args, t) {
   fn(...args)
   const id = setInterval(() => fn(...args), t)
   return function () {
@@ -499,3 +499,34 @@ const sortBy = function(arr, fn) {
 };
 
 // --------------------------------------------------------------------
+
+// 2695. Array Wrapper
+/**
+ * @param {number[]} nums
+ * @return {void}
+ */
+const ArrayWrapper = function(nums) {
+    
+};
+
+/**
+ * @return {number}
+ */
+ArrayWrapper.prototype.valueOf = function() {
+    
+}
+
+/**
+ * @return {string}
+ */
+ArrayWrapper.prototype.toString = function() {
+    
+}
+
+/**
+ * const obj1 = new ArrayWrapper([1,2]);
+ * const obj2 = new ArrayWrapper([3,4]);
+ * obj1 + obj2; // 10
+ * String(obj1); // "[1,2]"
+ * String(obj2); // "[3,4]"
+ */
