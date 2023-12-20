@@ -464,4 +464,22 @@ Array.prototype.last = function() {
   if (last.length !== 0) return last[0]
   return -1 
 };
-//----------------------------------------------------------------
+//-----------------------------------------------------------------
+
+// 2631. Group By
+/**
+ * @param {Function} fn
+ * @return {Object}
+ */
+Array.prototype.groupBy = function(fn) {
+  const mapped = {};
+  
+  for (const item of this) {
+      const output = fn(item);
+      const values = mapped[output] || [];
+      values.push(item);
+      mapped[output] = values;
+  }
+
+  return mapped
+};
