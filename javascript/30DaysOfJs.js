@@ -434,23 +434,24 @@ const isEmpty = function(obj) {
 // Steps
 // Divide to obtain the number of chunks -> arr.length / size
 // Iterate over the array and push the number to idx position for every chunk
-const chunk = function(arr, size) {
-    let chunkedArray = []
-    let cycle = 1
-    let idx = 0
+const chunk = function(arr, size) {    
+  let chunkedArray = []
+  let cycle = 1
+  let idx = 0
 
-    for (const el of arr) {
-      const next = chunkedArray[idx] ?? []
-      chunkedArray[idx] = [...next, el]
-      if (cycle < size) {
-        cycle++
-      } else {
-        cycle = 1
-        idx++
-      }
+  for (const el of arr) {
+    const next = chunkedArray[idx] || new Array();
+    next.push(el)
+    chunkedArray[idx] = next
+    if (cycle < size) {
+      cycle++
+    } else {
+      cycle = 1
+      idx++
     }
-  
-  return chunkedArray
+  }
+
+return chunkedArray
 };
 //----------------------------------------------------------------
 
