@@ -623,3 +623,28 @@ const join = function(arr1, arr2) {
 };
 
 // ------------------------------------------------------------------------------------------------
+
+// 2625. Flatten Deeply Nested Array
+/**
+ * @param {Array} arr
+ * @param {number} depth
+ * @return {Array}
+ */
+
+// How do I know what level in the array I'm currently in? Is the key question
+const flat = function (arr, n, flatArr = new Array(), levels = 0) {
+  // The main base case 
+  if (n === 0) return arr;
+
+  // n will be > 0
+  for (const item of arr) {
+    // The second base case, where Is being track the current level in the array
+    if (typeof(item) === 'object' && levels < n) {
+      flat(item, n, flatArr, levels + 1)
+      continue
+    }
+
+    flatArr.push(item);
+  }
+  return flatArr
+};
