@@ -692,3 +692,43 @@ const compactObject = function(obj) {
   return compact
 };
 // ------------------------------------------------------------------------------------
+
+// 2694. Event Emitter
+class EventEmitter {
+  constructor() {
+    this.subscribers = new Map();
+  }
+
+  /**
+   * @param {string} eventName
+   * @param {Function} callback
+   * @return {Object}
+   */
+  subscribe(eventName, callback) {
+    const id = Math.random().toString(36).substring(2) + Date.now().toString(36);
+    this.subscribers.set(id, {"event": eventName, "callback": callback});
+    return {
+        unsubscribe: () => {
+          this.subscribers.delete(id);
+        }
+    };
+  }
+  
+  /**
+   * @param {string} eventName
+   * @param {Array} args
+   * @return {Array}
+   */
+  emit(eventName, args = []) {
+    const calls = new Array()
+
+    for (const [id, value] of this.subscribers) {
+      if (value && value.event === eventName) {
+        calls.push(value.callback(...args))
+      }
+    }
+
+    return calls
+  }
+}
+// ----------------------------------------------------------------
