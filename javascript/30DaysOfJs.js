@@ -648,3 +648,47 @@ const flat = function (arr, n, flatArr = new Array(), levels = 0) {
   }
   return flatArr
 };
+// -----------------------------------------------------------------------------------
+
+// First condition is to evaluate if obj is 
+//  type of array or object
+// Then return and Compact Object 
+
+// How to determine if a value is falsy ==> Boolean(x) === false
+
+// 2705. Compact Object
+/**
+ * @param {Object|Array} obj
+ * @return {Object|Array}
+ */
+const compactObject = function(obj) {
+  if (typeof(obj) !== 'object' || !obj) return 
+
+  if (Array.isArray(obj)) {
+    const newArray = new Array()
+    for (const item of obj) {
+      if (typeof(item) === 'object' && item) {
+        newArray.push(compactObject(item))
+        continue
+      }
+
+      if (!Boolean(item)) continue
+      newArray.push(item)
+    }
+    return newArray
+  }
+
+  const compact = new Object()
+  for (const [key, value] of Object.entries(obj)) {
+    if (typeof(value) === 'object' && value) {
+      compact[key] = compactObject(value)
+      continue
+    }
+
+    if (!Boolean(value)) continue
+    compact[key] = value
+  }
+
+  return compact
+};
+// ------------------------------------------------------------------------------------
